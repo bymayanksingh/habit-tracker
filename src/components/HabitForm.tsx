@@ -42,45 +42,37 @@ const HabitForm: React.FC<HabitFormProps> = ({ habit, onSubmit, focusedElement, 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md mb-4">
-      <div className="mb-4">
-        <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
-          Habit Name
-        </label>
+    <form onSubmit={handleSubmit} className="mb-4">
+      <h2 className="text-2xl font-bold mb-2 text-gray-800">Add New Habit</h2>
+      <div className="flex items-center mb-2">
         <input
           type="text"
           id="form-name"
           ref={nameInputRef}
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className={`w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none ${focusedElement === 'form-name' ? 'ring-4 ring-yellow-400' : 'focus:border-blue-500'}`}
+          className={`flex-grow px-2 py-1 text-gray-700 border rounded-l-lg focus:outline-none ${focusedElement === 'form-name' ? 'ring-2 ring-yellow-400' : 'focus:border-blue-500'}`}
+          placeholder="Habit name"
           required
           onFocus={() => setFocusedElement('form-name')}
         />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="color" className="block text-gray-700 font-bold mb-2">
-          Habit Color
-        </label>
         <input
           type="color"
           id="form-color"
           ref={colorInputRef}
           value={color}
           onChange={(e) => setColor(e.target.value)}
-          className={`w-full h-10 border rounded-lg cursor-pointer ${focusedElement === 'form-color' ? 'ring-4 ring-yellow-400' : ''}`}
+          className={`w-10 h-8 border-t border-b cursor-pointer ${focusedElement === 'form-color' ? 'ring-2 ring-yellow-400' : ''}`}
           onFocus={() => setFocusedElement('form-color')}
         />
-      </div>
-      <div className="flex justify-end">
         <button
           type="submit"
           id="form-submit"
           ref={submitButtonRef}
-          className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center ${focusedElement === 'form-submit' ? 'ring-4 ring-yellow-400' : ''}`}
+          className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-r-lg inline-flex items-center ${focusedElement === 'form-submit' ? 'ring-2 ring-yellow-400' : ''}`}
           onFocus={() => setFocusedElement('form-submit')}
         >
-          <Check size={20} className="mr-1" /> Add Habit
+          <Check size={16} className="mr-1" /> Add
         </button>
       </div>
     </form>

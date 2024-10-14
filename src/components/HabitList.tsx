@@ -10,16 +10,15 @@ interface HabitListProps {
   onDelete: (id: string) => void;
   focusedElement: string;
   setFocusedElement: (id: string) => void;
-  habitListRef: React.RefObject<HTMLDivElement>;
 }
 
-const HabitList: React.FC<HabitListProps> = ({ habits, habitLogs, onToggle, onEdit, onDelete, focusedElement, setFocusedElement, habitListRef }) => {
+const HabitList: React.FC<HabitListProps> = ({ habits, habitLogs, onToggle, onEdit, onDelete, focusedElement, setFocusedElement }) => {
   const today = new Date().toISOString().split('T')[0];
 
   return (
-    <div ref={habitListRef} className="bg-white rounded-lg shadow-md p-4 max-h-[60vh] overflow-y-auto">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Your Habits</h2>
-      <div className="space-y-4">
+    <div>
+      <h2 className="text-2xl font-bold mb-2 text-gray-800">Your Habits</h2>
+      <div className="space-y-2">
         {habits.map((habit) => {
           const completedToday = habitLogs.some(log => log.habitId === habit.id && log.date === today);
           const isFocused = focusedElement === `habit-${habit.id}`;
@@ -27,21 +26,21 @@ const HabitList: React.FC<HabitListProps> = ({ habits, habitLogs, onToggle, onEd
             <div
               key={habit.id}
               id={`habit-${habit.id}`}
-              className={`flex items-center justify-between p-4 bg-gray-100 rounded-lg ${isFocused ? 'ring-4 ring-yellow-400' : ''}`}
+              className={`flex items-center justify-between p-2 bg-gray-100 rounded-lg ${isFocused ? 'ring-2 ring-yellow-400' : ''}`}
               tabIndex={0}
               onFocus={() => setFocusedElement(`habit-${habit.id}`)}
             >
               <div className="flex items-center">
                 <div
-                  className="w-6 h-6 rounded-full mr-4"
+                  className="w-4 h-4 rounded-full mr-2"
                   style={{ backgroundColor: habit.color }}
                 ></div>
-                <h3 className="text-xl font-semibold text-gray-800">{habit.name}</h3>
+                <h3 className="text-sm font-semibold text-gray-800">{habit.name}</h3>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex space-x-1">
                 <button
                   onClick={() => onToggle(habit.id, today)}
-                  className={`p-2 rounded-full ${
+                  className={`p-1 rounded-full ${
                     completedToday ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-600'
                   }`}
                 >
@@ -49,15 +48,15 @@ const HabitList: React.FC<HabitListProps> = ({ habits, habitLogs, onToggle, onEd
                 </button>
                 <button
                   onClick={() => onEdit(habit)}
-                  className="p-2 rounded-full bg-blue-500 text-white"
+                  className="p-1 rounded-full bg-blue-500 text-white"
                 >
-                  <Edit size={20} />
+                  <Edit size={16} />
                 </button>
                 <button
                   onClick={() => onDelete(habit.id)}
-                  className="p-2 rounded-full bg-red-500 text-white"
+                  className="p-1 rounded-full bg-red-500 text-white"
                 >
-                  <Trash2 size={20} />
+                  <Trash2 size={16} />
                 </button>
               </div>
             </div>
